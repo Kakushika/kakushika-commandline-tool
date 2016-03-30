@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Commandline tool for Kakushika (https://portal.kksk.io) ",
   "main": "kksk.js",
+  "bin": {
+      "kksk": "./bin/kksk"
+  },
   "scripts": {
     "start": "node kksk.js",
     "test": "echo \"Error: no test specified\" && exit 1"
