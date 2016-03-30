@@ -1,10 +1,12 @@
 var commandLineArgs = require('command-line-args'),
     fetch = require('node-fetch'),
-    fs = require('fs');
+    fs = require('fs'),
+    path = require('path');
 var URIROOT = "https://api.kksk.io/v1",
     TOKEN = process.env.KKSK_TOKEN,
-    HEADERS = { "Ocp-Apim-Subscription-Key": TOKEN, "Content-Type": "application/json" };
-
+    HEADERS = { "Ocp-Apim-Subscription-Key": TOKEN, "Content-Type": "application/json" },
+    WORKING_DIR = process.cwd() + "/";
+    
 var cli = commandLineArgs([
   { name: 'list', type: Boolean, group: ["rooms", "groups", "splits", "topics"] },
   { name: 'create', type: String, group: ["rooms", "splits"] },
@@ -24,6 +26,15 @@ var cli = commandLineArgs([
 
 var options = cli.parse();
 
+function check(response){
+  return new Promise(function(resolve, reject){
+    if(response.status == 200 || response.status == 201)
+      resolve(response);
+    else
+      reject(response);
+  })
+}
+
 if(!TOKEN)
   console.log("set KKSK_TOKEN in environment variables");
   
@@ -31,10 +42,12 @@ if(options.rooms.rooms){
   if(options.rooms.list){
     fetch(URIROOT + "/rooms", {
       headers: HEADERS
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
   if(!!options.rooms.create){
@@ -42,19 +55,21 @@ if(options.rooms.rooms){
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify({ name: options.rooms.create })
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
 } 
 
 else if(options.messages.messages){
   if(!!options.messages.upload){
-    var json = fs.readFileSync(options.messages.create).toString();
+    var json = fs.readFileSync(path.join(WORKING_DIR + options.messages.upload)).toString();
     if(!!options.messages.room){
-    var messages = JSON.parse(json);
+      var messages = JSON.parse(json);
       messages.forEach(function(m){
         m.roomId = options.messages.room;
       })
@@ -64,12 +79,14 @@ else if(options.messages.messages){
       method: "POST",
       headers: HEADERS,
       body: json
-    }).then(function(response){
-      return response.json();
+    }).then(check).then(function(response){
+      return response.text();
     }).then(function(json) {
       if(options.messages.output)
-        fs.writeFileSync(options.messages.output, json);
+        fs.writeFileSync(path.join(WORKING_DIR + options.messages.output), json);
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
 }
@@ -78,23 +95,27 @@ else if(options.splits.splits){
   if(options.splits.list){
     fetch(URIROOT + "/splitrequests", {
       headers: HEADERS
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
   if(options.splits.show){
     fetch(URIROOT + "/splitrequests/" + options.splits.show, {
       headers: HEADERS
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
   if(!!options.splits.create){
-    var messages = fs.readFileSync(options.splits.create).toString();
+    var messages = fs.readFileSync(path.join(WORKING_DIR + options.splits.create)).toString();
     messages = JSON.parse(messages);
     var data = {
       roomId: options.splits.room,
@@ -105,10 +126,12 @@ else if(options.splits.splits){
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify(data)
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
 }
@@ -117,19 +140,23 @@ else if(options.topics.topics){
   if(options.topics.list){
     fetch(URIROOT + "/topics", {
       headers: HEADERS
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
   if(options.topics.show){
     fetch(URIROOT + "/splitrequests/" + options.topics.show, {
       headers: HEADERS
-    }).then(function(response){
+    }).then(check).then(function(response){
       return response.json();
     }).then(function(json) {
       console.log(json);
+    }).catch(function(err){
+      console.log(err);
     });
   }
 }
