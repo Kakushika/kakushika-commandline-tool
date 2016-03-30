@@ -1,0 +1,27 @@
+{
+  "name": "kakushika-commandline-tool",
+  "version": "1.0.0",
+  "description": "Commandline tool for Kakushika (https://portal.kksk.io) ",
+  "main": "kksk.js",
+  "scripts": {
+    "start": "node kksk.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kakushika/kakushika-commandline-tool.git"
+  },
+  "keywords": [
+    "kakushika"
+  ],
+  "author": "Kaku-Shika Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kakushika/kakushika-commandline-tool/issues"
+  },
+  "homepage": "https://github.com/Kakushika/kakushika-commandline-tool#readme",
+  "dependencies": {
+    "command-line-args": "^2.1.6",
+    "node-fetch": "^1.4.1"
+  }
+}
