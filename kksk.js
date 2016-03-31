@@ -138,18 +138,7 @@ else if(options.splits.splits){
 
 else if(options.topics.topics){
   if(options.topics.list){
-    fetch(URIROOT + "/topics", {
-      headers: HEADERS
-    }).then(check).then(function(response){
-      return response.json();
-    }).then(function(json) {
-      console.log(json);
-    }).catch(function(err){
-      console.log(err);
-    });
-  }
-  if(options.topics.show){
-    fetch(URIROOT + "/splitrequests/" + options.topics.show, {
+    fetch(URIROOT + "/topics?room="+options.topics.room, {
       headers: HEADERS
     }).then(check).then(function(response){
       return response.json();
