@@ -15,7 +15,7 @@ var cli = commandLineArgs([
   
   { name: 'rooms', type: Boolean, group: "rooms"},
   { name: 'messages', type: Boolean, group: "messages" },
-  { name: 'room', type: Number, group: ["messages", "splits", "topics"] },
+  { name: 'room', type: String, group: ["messages", "splits", "topics"] },
   { name: 'output', type: String, group: "messages" },  
   { name: 'splits', type: Boolean, group: "splits" },
   { name: 'lang', type: String, group: "splits" },
@@ -75,6 +75,7 @@ else if(options.messages.messages){
       })
       json = JSON.stringify(messages);
     }
+    
     fetch(URIROOT + "/messages", {
       method: "POST",
       headers: HEADERS,
