@@ -2,10 +2,10 @@ box: node
 build:
   steps:
     - npm-install
-    - script
+    - script:
       name: test
       code: npm run test
-    - script
+    - script:
       name: build
       code: npm run build
   after-steps:
