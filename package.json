@@ -4,7 +4,7 @@
   "description": "Commandline tool for Kakushika (https://portal.kksk.io) ",
   "main": "kksk.js",
   "bin": {
-      "kksk": "./bin/kksk"
+    "kksk": "./bin/kksk"
   },
   "scripts": {
     "start": "node kksk.js",
@@ -26,5 +26,10 @@
   "dependencies": {
     "command-line-args": "^2.1.6",
     "node-fetch": "^1.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.7.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.3.0",
   }
 }
