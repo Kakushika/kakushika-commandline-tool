@@ -28,8 +28,16 @@
     "node-fetch": "^1.4.1"
   },
   "devDependencies": {
+    "babel-core": "^6.7.6",
+    "babel-preset-es2015-node5": "^1.2.0",
+    "babel-preset-stage-3": "^6.5.0",
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.3.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^2.0.0",
+    "gulp-load-plugins": "^1.2.0",
+    "run-sequence": "^1.1.5"
   }
 }
