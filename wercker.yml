@@ -1,0 +1,14 @@
+box: node
+  build:
+    steps:
+      - npm-install
+      - script
+        name: test
+        code: npm run test
+      - script
+        name: build
+        code: npm run build
+    after-steps:
+      - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_WEBHOOK_URL
+        branches: ^master$

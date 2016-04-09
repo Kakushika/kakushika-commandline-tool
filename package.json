@@ -7,8 +7,9 @@
     "kksk": "./bin/kksk"
   },
   "scripts": {
-    "start": "node kksk.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
