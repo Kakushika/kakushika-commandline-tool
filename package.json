@@ -24,13 +24,17 @@
     "url": "https://github.com/Kakushika/kakushika-commandline-tool/issues"
   },
   "homepage": "https://github.com/Kakushika/kakushika-commandline-tool#readme",
+  "engines": {
+    "node": "^4.4.2"
+  },
   "dependencies": {
     "command-line-args": "^2.1.6",
     "node-fetch": "^1.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.6",
-    "babel-preset-es2015-node5": "^1.2.0",
+    "babel-eslint": "^6.0.2",
+    "babel-preset-es2015-node4": "^2.1.0",
     "babel-preset-stage-3": "^6.5.0",
     "del": "^2.2.0",
     "eslint": "^2.7.0",
