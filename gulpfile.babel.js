@@ -15,6 +15,11 @@ gulp.task('lint', () => {
     .pipe($.eslint.failOnError());
 });
 
+gulp.task('test', () => {
+  // No specificate test
+  return 0;
+});
+
 gulp.task('clean', () => del(['bin/*.js']));
 
 gulp.task('build', () => {

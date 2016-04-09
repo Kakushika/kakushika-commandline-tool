@@ -1,0 +1,21 @@
+box: ruby
+build:
+  steps:
+    - script:
+      name: install nodejs LTS
+      code: |
+        curl -L http://git.io/n-install | bash -s -- -y lts
+        . /root/.bashrc
+    - script:
+      name: npm install
+      code: npm install
+    - script:
+      name: test
+      code: npm run test
+    - script:
+      name: build
+      code: npm run build
+  after-steps:
+    - wantedly/pretty-slack-notify:
+      webhook_url: $SLACK_WEBHOOK_URL
+      branches: ^master$
