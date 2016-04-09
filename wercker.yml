@@ -1,7 +1,14 @@
-box: node
+box: ruby
 build:
   steps:
-    - npm-install
+    - script:
+      name: install nodejs LTS
+      code: |
+        curl -L http://git.io/n-install | bash -s -- -y lts
+        . /root/.bashrc
+    - script:
+      name: npm install
+      code: npm install
     - script:
       name: test
       code: npm run test
