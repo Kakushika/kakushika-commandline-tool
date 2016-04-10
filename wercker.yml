@@ -10,6 +10,9 @@ build:
       name: npm install
       code: npm install
     - script:
+      name: lint
+      code: npm run lint
+    - script:
       name: test
       code: npm run test
     - script:

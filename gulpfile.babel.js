@@ -4,7 +4,6 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
-import runSequence from 'run-sequence';
 
 const $ = gulpLoadPlugins();
 
@@ -22,16 +21,10 @@ gulp.task('test', () => {
 
 gulp.task('clean', () => del(['bin/*.js']));
 
-gulp.task('build', () => {
+gulp.task('build', ['clean'], () => {
   return gulp.src('src/*.js')
     .pipe($.babel())
     .pipe(gulp.dest('bin'));
 });
 
-gulp.task('default', (cb) => {
-  runSequence(
-    'clean',
-    'build',
-    cb
-  );
-});
+gulp.task('default', ['build']);
