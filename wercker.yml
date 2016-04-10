@@ -22,3 +22,12 @@ build:
     - wantedly/pretty-slack-notify:
       webhook_url: $SLACK_WEBHOOK_URL
       branches: ^master$
+deploy:
+  steps:
+    - add-to-known_hosts:
+      hostname: $GIT_DEPLOY_HOST
+    - add-ssh-key:
+      keyname: GITHUB_DEPLOY_KEY
+    - script:
+      name: push to remote
+      code: git push origin master
