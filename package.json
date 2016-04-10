@@ -9,6 +9,7 @@
   "scripts": {
     "lint": "gulp lint",
     "test": "gulp test",
+    "clean": "gulp clean",
     "build": "gulp build"
   },
   "repository": {
