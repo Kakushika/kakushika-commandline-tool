@@ -31,6 +31,12 @@ deploy:
     - script:
       name: push to remote
       code: |
+        git config --global user.email "werker@example.com"
+        git config --global user.name "wercker"
+        git remote add github git@github.com:Kakushika/kakushika-commandline-tool.git
         git add .
         git commit -m "wercker build $WERCKER_DEPLOY_URL"
-        git push origin master
+        git branch deploy
+        git checkout master
+        git merge deploy
+        git push github master
