@@ -30,4 +30,7 @@ deploy:
       keyname: GITHUB_DEPLOY_KEY
     - script:
       name: push to remote
-      code: git push origin master
+      code: |
+        git add .
+        git commit -m "wercker build $WERCKER_DEPLOY_URL"
+        git push origin master
