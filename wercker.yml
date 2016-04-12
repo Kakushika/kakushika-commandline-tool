@@ -33,7 +33,11 @@ deploy:
       code: |
         git config --global user.email "werker@example.com"
         git config --global user.name "wercker"
-        git remote add github git@github.com:Kakushika/kakushika-commandline-tool.git
+        modify=$(git diff --name-only --relative $1)
+        if [ $? -ne 0 ]; then
+          exit 0
+        fi
+        git remote add github "$GIT_REMOTE"
         git add .
         git commit -m "build $WERCKER_DEPLOY_URL [ci skip]"
         git branch deploy
