@@ -41,18 +41,18 @@ if (!_config2.default.API_TOKEN) {
 
 if (options.rooms.rooms) {
   if (options.rooms.list) {
-    _api2.default.listRooms().then(response => {
-      console.log(response.json());
+    _api2.default.listRooms.then(response => {
+      console.log(response);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
   if (!!options.rooms.create) {
     _api2.default.createRooms(options.rooms.create).then(response => {
-      console.log(response.json());
+      console.log(response);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
@@ -67,30 +67,31 @@ if (options.rooms.rooms) {
     }
 
     _api2.default.uploadMessages(messages).then(response => {
-      const responseMessages = response.text();
+      console.log(response);
+      const responseMessages = response;
       if (options.messages.output) {
         _fs2.default.writeFileSync(_path2.default.join(WORKING_DIR, options.messages.output), responseMessages);
       }
       console.log(responseMessages);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
 } else if (options.splits.splits) {
   if (options.splits.list) {
-    _api2.default.listSplits().then(response => {
-      console.log(response.json());
+    _api2.default.listSplits.then(response => {
+      console.log(response);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
   if (options.splits.show) {
     _api2.default.showSplits(options.splits.show).then(response => {
-      console.log(response.json());
+      console.log(response);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
@@ -102,21 +103,22 @@ if (options.rooms.rooms) {
       messages: messages
     };
     _api2.default.createSplits(data).then(response => {
-      console.log(response.json());
+      console.log(response);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
 } else if (options.topics.topics) {
   if (options.topics.list) {
     _api2.default.listTopics(options.topics.room).then(response => {
-      console.log(response.json());
+      console.log(response);
     }).catch(error => {
-      console.log(error.stack);
+      console.log(error);
       process.exit(1);
     });
   }
 } else {
   console.log(cli.getUsage(cliOptions.options));
+  process.exit(0);
 }

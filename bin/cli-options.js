@@ -54,9 +54,9 @@ const optionDefinitions = [{
 }];
 
 const options = {
-  title: 'kakushika-commandline-tool',
+  title: 'kksk-cli',
   description: 'Commandline tool for Kakushika',
-  footer: ['Project home: [underline]{https://portal.kksk.io}', 'Git: [underline]{https://github.com/Kakushika/kakushika-commandline-tool}']
+  footer: ['Project home: [underline]{https://portal.kksk.io}', 'Git: [underline]{https://github.com/Kakushika/kksk-cli}']
 };
 
 exports.optionDefinitions = optionDefinitions;

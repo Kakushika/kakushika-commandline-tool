@@ -28,13 +28,18 @@ const callAPI = (() => {
   var ref = _asyncToGenerator(function* (path, method, body, headers) {
     try {
       const options = Object.assign({
-        headers: _config2.default.API_CALL_HEADERS
-      }, method, body, headers);
-      const request = yield (0, _nodeFetch2.default)(`${ _config2.default.API_ROOT }${ path }`, options);
-      if (!request.ok) {
-        throw request.statusText;
+        headers: Object.assign(_config2.default.API_CALL_HEADERS, headers)
+      }, method, body);
+      const response = yield (0, _nodeFetch2.default)(`${ _config2.default.API_ROOT }${ path }`, options);
+      if (!response.ok) {
+        throw response.statusText;
       }
-      return request;
+      if (response.headers.get('Content-Type').includes('application/json')) {
+        const responseBody = yield response.json();
+        return responseBody;
+      }
+      const responseBody = yield response.text();
+      return responseBody;
     } catch (error) {
       throw error;
     }
@@ -47,33 +52,25 @@ const callAPI = (() => {
 
 const api = {
   listRooms: callAPI('/rooms'),
-  createRooms: roomName => {
-    callAPI('/rooms', {
-      method: 'POST'
-    }, {
-      body: JSON.stringify({
-        name: roomName
-      })
-    });
-  },
-  uploadMessages: message => {
-    // text
-    callAPI('/messages', {
-      method: 'POST'
-    }, {
-      body: JSON.stringify(message)
-    });
-  },
+  createRooms: roomName => callAPI('/rooms', {
+    method: 'POST'
+  }, {
+    body: JSON.stringify({
+      name: roomName
+    })
+  }),
+  uploadMessages: message => callAPI('/messages', {
+    method: 'POST'
+  }, {
+    body: JSON.stringify(message)
+  }),
   listSplits: callAPI('/splitrequests'),
-  showSplits: roomId => {
-    callAPI(`/splitrequests/${ roomId }`);
-  },
+  showSplits: roomId => callAPI(`/splitrequests/${ roomId }`),
   createSplits: _ref => {
     let roomId = _ref.roomId;
     let language = _ref.language;
     let messages = _ref.messages;
-
-    callAPI('/splitrequests', {
+    return callAPI('/splitrequests', {
       method: 'POST'
     }, {
       body: JSON.stringify({
@@ -83,9 +80,7 @@ const api = {
       })
     });
   },
-  listTopics: roomId => {
-    callAPI(`/topics?room=${ roomId }`);
-  }
+  listTopics: roomId => callAPI(`/topics?room=${ roomId }`)
 };
 
 exports.default = api;
