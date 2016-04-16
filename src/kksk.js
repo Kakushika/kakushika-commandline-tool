@@ -19,22 +19,22 @@ if (!config.API_TOKEN) {
 
 if (options.rooms.rooms) {
   if (options.rooms.list) {
-    api.listRooms()
+    api.listRooms
       .then((response) => {
-        console.log(response.json());
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
   if (!!options.rooms.create) {
     api.createRooms(options.rooms.create)
       .then((response) => {
-        console.log(response.json());
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
@@ -50,35 +50,36 @@ if (options.rooms.rooms) {
 
     api.uploadMessages(messages)
       .then((response) => {
-        const responseMessages = response.text();
+        console.log(response);
+        const responseMessages = response;
         if (options.messages.output) {
           fs.writeFileSync(path.join(WORKING_DIR, options.messages.output), responseMessages);
         }
         console.log(responseMessages);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
 } else if (options.splits.splits) {
   if (options.splits.list) {
-    api.listSplits()
+    api.listSplits
       .then((response) => {
-        console.log(response.json());
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
   if (options.splits.show) {
     api.showSplits(options.splits.show)
       .then((response) => {
-        console.log(response.json());
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
@@ -91,10 +92,10 @@ if (options.rooms.rooms) {
     };
     api.createSplits(data)
       .then((response) => {
-        console.log(response.json());
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
@@ -102,13 +103,14 @@ if (options.rooms.rooms) {
   if (options.topics.list) {
     api.listTopics(options.topics.room)
       .then((response) => {
-        console.log(response.json());
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error);
         process.exit(1);
       });
   }
 } else {
   console.log(cli.getUsage(cliOptions.options));
+  process.exit(0);
 }
