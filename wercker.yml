@@ -35,9 +35,6 @@ deploy:
         git config --global user.name "wercker"
         git remote add github "$GIT_REMOTE"
         git add .
-        if [ -n "$(git diff --name-only --cached)" ]; then
-          exit 0
-        fi
         git commit -m "build $WERCKER_DEPLOY_URL [ci skip]"
         git branch deploy
         git checkout $WERCKER_GIT_BRANCH
