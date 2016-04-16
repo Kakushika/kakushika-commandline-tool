@@ -1,6 +1,6 @@
-# kakushika-commandline-tool
+# kksk-cli
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![wercker status](https://app.wercker.com/status/c9923f374145f1458c769e99f78c33df/s/master "wercker status")](https://app.wercker.com/project/bykey/c9923f374145f1458c769e99f78c33df)
+[![wercker status](https://app.wercker.com/status/2a09575a0627a542768d0a5a9d81b500/s/master "wercker status")](https://app.wercker.com/project/bykey/2a09575a0627a542768d0a5a9d81b500)
 
 Commandline tool for Kakushika (https://portal.kksk.io)
 
@@ -12,7 +12,7 @@ By using Kakushika, simply save the message or you will be able to organize a la
 
 ### Step1: Install kksk command
 
-```npm install -g https://github.com/Kakushika/kakushika-commandline-tool.git```
+```npm install -g kksk-cli```
 
 ### Step2 Set token in environment variables
 

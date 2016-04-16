@@ -12,13 +12,18 @@ import config from './config.js';
 const callAPI = async(path, method, body, headers) => {
   try {
     const options = Object.assign({
-      headers: config.API_CALL_HEADERS,
-    }, method, body, headers);
-    const request = await fetch(`${config.API_ROOT}${path}`, options);
-    if (!request.ok) {
-      throw request.statusText;
+      headers: Object.assign(config.API_CALL_HEADERS, headers),
+    }, method, body);
+    const response = await fetch(`${config.API_ROOT}${path}`, options);
+    if (!response.ok) {
+      throw response.statusText;
     }
-    return request;
+    if (response.headers.get('Content-Type').includes('application/json')) {
+      const responseBody = await response.json();
+      return responseBody;
+    }
+    const responseBody = await response.text();
+    return responseBody;
   } catch (error) {
     throw error;
   }
@@ -26,31 +31,27 @@ const callAPI = async(path, method, body, headers) => {
 
 const api = {
   listRooms: callAPI('/rooms'),
-  createRooms: (roomName) => {
+  createRooms: (roomName) =>
     callAPI('/rooms', {
       method: 'POST',
     }, {
       body: JSON.stringify({
         name: roomName,
       }),
-    });
-  },
-  uploadMessages: (message) => {  // text
+    }),
+  uploadMessages: (message) =>
     callAPI('/messages', {
       method: 'POST',
     }, {
       body: JSON.stringify(message),
-    });
-  },
+    }),
   listSplits: callAPI('/splitrequests'),
-  showSplits: (roomId) => {
-    callAPI(`/splitrequests/${roomId}`);
-  },
+  showSplits: (roomId) => callAPI(`/splitrequests/${roomId}`),
   createSplits: ({
-    roomId,
-    language,
-    messages,
-  }) => {
+      roomId,
+      language,
+      messages,
+    }) =>
     callAPI('/splitrequests', {
       method: 'POST',
     }, {
@@ -59,11 +60,8 @@ const api = {
         language,
         messages,
       }),
-    });
-  },
-  listTopics: (roomId) => {
-    callAPI(`/topics?room=${roomId}`);
-  },
+    }),
+  listTopics: (roomId) => callAPI(`/topics?room=${roomId}`),
 };
 
 export default api;

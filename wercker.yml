@@ -40,6 +40,6 @@ deploy:
         fi
         git commit -m "build $WERCKER_DEPLOY_URL [ci skip]"
         git branch deploy
-        git checkout master
+        git checkout $WERCKER_GIT_BRANCH
         git merge deploy
-        git push github master
+        git push github $WERCKER_GIT_BRANCH
