@@ -1,6 +1,8 @@
-# kksk-cli
+# kksk-cli (deprecated)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![wercker status](https://app.wercker.com/status/2a09575a0627a542768d0a5a9d81b500/s/master "wercker status")](https://app.wercker.com/project/bykey/2a09575a0627a542768d0a5a9d81b500)
+
+**Sorry, this service ended**
 
 Commandline tool for Kakushika (https://portal.kksk.io)
 
