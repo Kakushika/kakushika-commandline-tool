@@ -25,7 +25,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
  * @return {Promise}
  */
 const callAPI = (() => {
-  var ref = _asyncToGenerator(function* (path, method, body, headers) {
+  var _ref = _asyncToGenerator(function* (path, method, body, headers) {
     try {
       const options = Object.assign({
         headers: Object.assign(_config2.default.API_CALL_HEADERS, headers)
@@ -46,7 +46,7 @@ const callAPI = (() => {
   });
 
   return function callAPI(_x, _x2, _x3, _x4) {
-    return ref.apply(this, arguments);
+    return _ref.apply(this, arguments);
   };
 })();
 
@@ -66,10 +66,10 @@ const api = {
   }),
   listSplits: callAPI('/splitrequests'),
   showSplits: roomId => callAPI(`/splitrequests/${ roomId }`),
-  createSplits: _ref => {
-    let roomId = _ref.roomId;
-    let language = _ref.language;
-    let messages = _ref.messages;
+  createSplits: _ref2 => {
+    let roomId = _ref2.roomId;
+    let language = _ref2.language;
+    let messages = _ref2.messages;
     return callAPI('/splitrequests', {
       method: 'POST'
     }, {
